@@ -1,0 +1,92 @@
+{% extends 'layouts/base-presentation.html' %}
+
+{% block title %}{{ object|yesno:"Update,Create" }} Dish Type{% endblock title %}
+
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block body_class %} bg-gray-100 {% endblock body_class %}
+
+{% block content %}
+
+<div class="container mt-7">
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-md-10">
+      <div class="card shadow-lg">
+        <div class="card-header bg-gradient-success p-3 d-flex justify-content-between align-items-center">
+          <h3 class="text-white mb-0">
+            <i class="fas fa-tags me-2"></i>
+            {{ object|yesno:"Update Dish Type,Create New Dish Type" }}
+          </h3>
+          {% if dish_type %}
+            <a href="{% url 'kitchen:dish-type-delete' dish_type.id %}" class="btn btn-danger btn-sm">
+              <i class="fas fa-trash-alt me-1"></i> Delete
+            </a>
+          {% endif %}
+        </div>
+
+        <div class="card-body p-4">
+          <form action="" method="post" novalidate>
+            {% csrf_token %}
+
+            <div class="row">
+              {% for field in form %}
+              <div class="col-md-12 mb-3">
+                <div class="form-group">
+                  <label for="{{ field.id_for_label }}" class="form-label">
+                    {{ field.label }}
+                    {% if field.field.required %}<span class="text-danger">*</span>{% endif %}
+                  </label>
+                  {{ field }}
+                  {% if field.help_text %}
+                    <small class="form-text text-muted">{{ field.help_text }}</small>
+                  {% endif %}
+                  {% for error in field.errors %}
+                    <div class="invalid-feedback d-block">{{ error }}</div>
+                  {% endfor %}
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+
+            <div class="d-flex justify-content-between mt-4">
+              <a href="{% url 'kitchen:dish-types-list' %}" class="btn btn-outline-secondary">
+                <i class="fas fa-arrow-left me-2"></i> Cancel
+              </a>
+              <button type="submit" class="btn btn-success">
+                <i class="fas fa-save me-2"></i> {{ object|yesno:"Update,Save" }}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
+
+{% block javascripts %}
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const inputs = document.querySelectorAll('input:not([type="checkbox"]):not([type="radio"]), textarea, select');
+      inputs.forEach(input => {
+        input.classList.add('form-control');
+      });
+
+      const checkboxes = document.querySelectorAll('input[type="checkbox"], input[type="radio"]');
+      checkboxes.forEach(checkbox => {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'form-check';
+        checkbox.parentNode.insertBefore(wrapper, checkbox);
+        wrapper.appendChild(checkbox);
+
+        const label = document.createElement('label');
+        label.className = 'form-check-label';
+        label.htmlFor = checkbox.id;
+        wrapper.appendChild(label);
+
+        checkbox.classList.add('form-check-input');
+      });
+    });
+  </script>
+{% endblock javascripts %}
