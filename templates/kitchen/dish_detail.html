@@ -1,0 +1,116 @@
+{% extends 'layouts/base-presentation.html' %}
+
+{% block title %}{{ dish.name }} Details{% endblock title %}
+
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block body_class %} bg-gray-100 {% endblock body_class %}
+
+{% block content %}
+
+<div class="container mt-7">
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-md-10">
+      <div class="card shadow-lg">
+        <div class="card-header bg-gradient-success p-4">
+          <div class="d-flex justify-content-between align-items-center">
+            <h2 class="text-white mb-0">
+              <i class="fas fa-utensils me-2"></i>
+              {{ dish.name }}
+            </h2>
+            <div>
+              <a href="{% url 'kitchen:dish-update' dish.id %}" class="btn btn-sm btn-light me-2">
+                <i class="fas fa-edit me-1"></i> Update
+              </a>
+              <a href="{% url 'kitchen:dish-delete' dish.id %}" class="btn btn-sm btn-danger">
+                <i class="fas fa-trash me-1"></i> Delete
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-body p-5">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="mb-4">
+                <h5 class="text-success mb-3">
+                  <i class="fas fa-info-circle me-2"></i>Basic Information
+                </h5>
+                <div class="ps-4">
+                  <p class="mb-3">
+                    <strong class="d-block text-muted small">Name:</strong>
+                    <span class="fs-5">{{ dish.name }}</span>
+                  </p>
+                  <p class="mb-3">
+                    <strong class="d-block text-muted small">Dish Type:</strong>
+                    <span class="fs-5">{{ dish.dish_type }}</span>
+                  </p>
+                  <p class="mb-3">
+                    <strong class="d-block text-muted small">Price:</strong>
+                    <span class="fs-5">${{ dish.price }}</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="mb-4">
+                <h5 class="text-success mb-3">
+                  <i class="fas fa-align-left me-2"></i>Description
+                </h5>
+                <div class="ps-4">
+                  <p class="fs-5">{{ dish.description|default:"No description provided" }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-5">
+            <h5 class="text-success mb-4">
+              <i class="fas fa-users me-2"></i>Assigned Cooks
+            </h5>
+            {% if dish.cooks.all %}
+              <div class="table-responsive">
+                <table class="table table-hover">
+                  <thead class="bg-gray-200">
+                    <tr>
+                      <th>Username</th>
+                      <th>Full Name</th>
+                      <th>Years of Experience</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for cook in dish.cooks.all %}
+                    <tr>
+                      <td>{{ cook.username }}</td>
+                      <td>{{ cook.first_name }} {{ cook.last_name }}</td>
+                      <td>{{ cook.years_of_experience|default:"-" }}</td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            {% else %}
+              <div class="alert alert-warning">
+                <i class="fas fa-exclamation-circle me-2"></i>
+                No cooks assigned to this dish yet.
+              </div>
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="card-footer bg-gray-100 border-0 text-end py-3">
+          <a href="{% url 'kitchen:dishes-list' %}" class="btn btn-outline-secondary">
+            <i class="fas fa-arrow-left me-2"></i> Back to Menu
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
+
+{% block javascripts %}
+  <script src="{{ ASSETS_ROOT }}/js/soft-design-system.min.js?v=1.0.1" type="text/javascript"></script>
+{% endblock javascripts %}
