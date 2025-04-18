@@ -23,10 +23,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv("SECRET_KEY")
+SECRET_KEY = "django-insecure-_8vs)c98af22+x2@_+i(kea8kd3cc_%l@#ca)12z^xs2rzvepe"
+    # os.getenv("SECRET_KEY"))
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv("DEBUG") == "True"
+DEBUG = True #os.getenv("DEBUG") == "True"
 
 ALLOWED_HOSTS = []
 
@@ -43,10 +44,12 @@ INSTALLED_APPS = [
     "kitchen",
     "crispy_forms",
     "crispy_bootstrap5",
+    "debug_toolbar"
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -55,9 +58,9 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-if DEBUG:
-    INSTALLED_APPS += ["debug_toolbar"],
-    MIDDLEWARE.insert(1, "debug_toolbar.middleware.DebugToolbarMiddleware")
+# if DEBUG:
+#     INSTALLED_APPS += ["debug_toolbar"],
+#     MIDDLEWARE.insert(1, "debug_toolbar.middleware.DebugToolbarMiddleware")
 
 
 ROOT_URLCONF = "kitchen_service.urls"

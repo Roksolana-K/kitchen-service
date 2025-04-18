@@ -91,7 +91,7 @@ class DishTypeListView(LoginRequiredMixin, generic.ListView):
         queryset = DishType.objects.all()
         form = DishTypeSearchForm(self.request.GET)
         if form.is_valid():
-            return queryset.filter(name__icontains=form.cleaned_data["name"])
+            queryset = queryset.filter(name__icontains=form.cleaned_data["name"])
         return queryset
 
 

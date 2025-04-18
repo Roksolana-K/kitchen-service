@@ -2,7 +2,6 @@
 
 {% block title %}{{ object|yesno:"Update,Create" }} Dish{% endblock title %}
 
-<!-- Specific CSS goes HERE -->
 {% block stylesheets %}{% endblock stylesheets %}
 
 {% block body_class %} bg-gray-100 {% endblock body_class %}
@@ -61,23 +60,19 @@
 
 {% endblock content %}
 
-<!-- Specific JS goes HERE -->
 {% block javascripts %}
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-    // input та textarea
     const inputs = document.querySelectorAll('input:not([type="checkbox"]):not([type="radio"]), textarea');
     inputs.forEach(input => {
       input.classList.add('form-control');
     });
 
-    // select (додаємо form-select, а не form-control!)
     const selects = document.querySelectorAll('select');
     selects.forEach(select => {
       select.classList.add('form-select');
     });
 
-    // чекбокси та радіо
     const checkboxes = document.querySelectorAll('input[type="checkbox"], input[type="radio"]');
     checkboxes.forEach(checkbox => {
       const wrapper = document.createElement('div');

@@ -23,7 +23,6 @@
             {% csrf_token %}
 
             <div class="row">
-              <!-- Поле - Ім'я користувача -->
               <div class="col-md-6 mb-3">
                 <div class="form-group">
                   <label for="{{ form.username.id_for_label }}" class="form-label">
@@ -40,7 +39,6 @@
                 </div>
               </div>
 
-              <!-- Поле - Електронна пошта -->
               <div class="col-md-6 mb-3">
                 <div class="form-group">
                   <label for="{{ form.email.id_for_label }}" class="form-label">
@@ -57,7 +55,6 @@
                 </div>
               </div>
 
-            <!-- Поле - First_name -->
             <div class="col-md-6 mb-3">
                 <div class="form-group">
                   <label for="{{ form.first_name.id_for_label }}" class="form-label">
@@ -75,7 +72,6 @@
             </div>
 
 
-            <!-- Поле - Last_name -->
             <div class="col-md-6 mb-3">
                 <div class="form-group">
                   <label for="{{ form.last_name.id_for_label }}" class="form-label">
@@ -92,7 +88,6 @@
                 </div>
             </div>
 
-              <!-- Поле - Роки досвіду -->
               <div class="col-md-6 mb-3">
                 <div class="form-group">
                   <label for="{{ form.years_of_experience.id_for_label }}" class="form-label">
@@ -109,7 +104,6 @@
                 </div>
               </div>
 
-              <!-- Поле для пароля -->
               <div class="col-md-6 mb-3">
                 <div class="form-group">
                   <label for="{{ form.password1.id_for_label }}" class="form-label">
@@ -123,7 +117,6 @@
                 </div>
               </div>
 
-              <!-- Поле для підтвердження пароля -->
               <div class="col-md-6 mb-3">
                 <div class="form-group">
                   <label for="{{ form.password2.id_for_label }}" class="form-label">
@@ -139,7 +132,6 @@
 
             <br>
 
-              <!-- Поле "is_staff" (якщо воно є і користувач є staff або суперкористувач) -->
                 <div class="col-md-6 mb-3">
                   <div class="form-group">
                     <label for="{{ form.is_staff.id_for_label }}" class="form-label">
@@ -152,7 +144,6 @@
                   </div>
                 </div>
 
-              <!-- Поле "is_superuser" (якщо воно є і користувач є суперкористувачем) -->
                 <div class="col-md-6 mb-3">
                   <div class="form-group">
                     <label for="{{ form.is_superuser.id_for_label }}" class="form-label">
