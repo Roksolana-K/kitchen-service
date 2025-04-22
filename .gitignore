@@ -273,6 +273,7 @@ fabric.properties
 # Installer logs
 
 # Unit test / coverage reports
+kitchen/tests.py
 
 # Translations
 
