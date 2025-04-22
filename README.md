@@ -35,7 +35,7 @@ pip install -r requirements.txt # install dependencies
 python manage.py migrate # apply migrations
 
 python manage.py createsuperuser 
-python manage.py generate_fake_datф # to add data to DB
+python manage.py generate_fake_data # to add data to DB
 python manage.py runserver
 ```
 
