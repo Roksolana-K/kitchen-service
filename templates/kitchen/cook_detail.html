@@ -1,0 +1,53 @@
+{% extends "layouts/base-presentation.html" %}
+
+{% block title %}Cook Details{% endblock title %}
+
+{% block body_class %} bg-gray-100 {% endblock body_class %}
+
+{% block content %}
+<div class="container mt-7">
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-md-10">
+      <div class="card shadow-lg">
+        <div class="card-header bg-gradient-primary p-3 d-flex justify-content-between align-items-center">
+          <h3 class="text-white mb-0">
+            <i class="fas fa-user me-2"></i> Cook Details
+          </h3>
+          <div>
+            <a href="{% url 'kitchen:cook-update' cook.id %}" class="btn btn-sm btn-light me-2">
+              <i class="fas fa-edit me-1"></i> Update
+            </a>
+            {% if user.is_superuser %}
+              <a href="{% url 'kitchen:cook-delete' cook.id %}" class="btn btn-sm btn-danger">
+                <i class="fas fa-trash-alt me-1"></i> Delete
+              </a>
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="card-body p-4">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"><strong>Username:</strong> {{ cook.username }}</li>
+            <li class="list-group-item"><strong>First name:</strong> {{ cook.first_name }}</li>
+            <li class="list-group-item"><strong>Last name:</strong> {{ cook.last_name }}</li>
+            <li class="list-group-item">
+              <strong>Dishes can cook:</strong>
+              {% if cook.dishes.all %}
+                <ul class="mt-2 mb-0">
+                  {% for dish in cook.dishes.all %}
+                    <li>{{ dish.name }}</li>
+                  {% empty %}
+                    <li class="text-muted">No dishes assigned</li>
+                  {% endfor %}
+                </ul>
+              {% else %}
+                <span class="text-muted">No dishes assigned</span>
+              {% endif %}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
